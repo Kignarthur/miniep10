@@ -1,13 +1,22 @@
-using Test
-
 function mtxSum()
-    println(max_sum_submatrix([1 1 1 ; 1 1 1 ; 1 1 1]))
+    max_sum_submatrix([])
+    max_sum_submatrix([0])
     max_sum_submatrix([0 -1 ; -2 -3])
+    max_sum_submatrix([100 -100 ; 100 -100])
+    max_sum_submatrix([1 1 1 ; 1 1 1 ; 1 1 1])
+    max_sum_submatrix([0 0 0 ; 0 0 0 ; 0 0 0])
+    max_sum_submatrix([1 2 3 ; 4 5 6 ; 7 8 9])
+    max_sum_submatrix([1 0 1 ; 0 -1 0 ; 1 -1 1])
     max_sum_submatrix([-1 1 1 ; 1 -1 1 ; 1 1 -2])
+    max_sum_submatrix([-1 -1 -1 ; -1 -1 -1 ; -1 -1 -1])
     println("OK")
 end
 
+#Add decent tests
+
 function max_sum_submatrix(matrix)
+
+    println()
 
     if length(matrix) < 2
         return println(matrix)
@@ -79,10 +88,12 @@ function max_sum_submatrix(matrix)
 
         if sum == maxSum
 
-            println( view( matrix, r : r + (s-1), c : c + (s-1) ) )
+            println(view( matrix, r : r + (s-1), c : c + (s-1) )) 
 
         end
 
     end
 
 end
+
+mtxSum()
