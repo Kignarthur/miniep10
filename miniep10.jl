@@ -1,33 +1,35 @@
 function mtxSum()
-    max_sum_submatrix([])
-    max_sum_submatrix([0])
-    max_sum_submatrix([0 -1 ; -2 -3])
-    max_sum_submatrix([100 -100 ; 100 -100])
-    max_sum_submatrix([1 1 1 ; 1 1 1 ; 1 1 1])
-    max_sum_submatrix([0 0 0 ; 0 0 0 ; 0 0 0])
-    max_sum_submatrix([1 2 3 ; 4 5 6 ; 7 8 9])
-    max_sum_submatrix([1 0 1 ; 0 -1 0 ; 1 -1 1])
-    max_sum_submatrix([-1 1 1 ; 1 -1 1 ; 1 1 -2])
-    max_sum_submatrix([-1 -1 -1 ; -1 -1 -1 ; -1 -1 -1])
-    println("OK")
+    println()
+    max_sum_submatrix([]);println()
+    max_sum_submatrix([0]);println()
+    max_sum_submatrix([0 -1 ; -2 -3]);println()
+    max_sum_submatrix([100 -100 ; 100 -100]);println()
+    max_sum_submatrix([1 1 1 ; 1 1 1 ; 1 1 1]);println()
+    max_sum_submatrix([0 0 0 ; 0 0 0 ; 0 0 0]);println()
+    max_sum_submatrix([1 2 3 ; 4 5 6 ; 7 8 9]);println()
+    max_sum_submatrix([1 0 1 ; 0 -1 0 ; 1 -1 1]);println()
+    max_sum_submatrix([1 -3 -1 ; -1 0 1 ; 1 -3 -1]);println()
+    max_sum_submatrix([-1 -1 -1 ; -1 -1 -1 ; -1 -1 -1]);println()
+    max_sum_submatrix([1 -2 1 ; 2 -1 2 ; 1 -2 1]);println()
+    max_sum_submatrix([0 0 0 0 ; 0 0 0 0 ; 0 0 0 0; 0 0 0 0]);println()
+    max_sum_submatrix([3 1 4 1 ; 5 9 2 6 ; 5 3 5 8; 9 7 9 3]);println()
+    println("END")
 end
-
-#Add decent tests
 
 function max_sum_submatrix(matrix)
 
-    println()
-
     if length(matrix) < 2
-        return println(matrix)
+        println(matrix)
+        return
     end
 
     matrixSize = size(matrix,1)
 
     maxSum = -Inf
-    Rows = [1]
-    Columns = [1]
-    SubMatrix = [1]
+    SumArr = [1]
+    RowsArr = [1]
+    ColumnsArr = [1]
+    SubMatrixArr = [1]
 
     for subMatrixSize in 1 : matrixSize
 
@@ -49,16 +51,18 @@ function max_sum_submatrix(matrix)
 
                 if sum > maxSum
 
-                    Rows[1] = row
-                    Columns[1] = column
-                    SubMatrix[1] = subMatrixSize
+                    SumArr[1] = sum
+                    RowsArr[1] = row
+                    ColumnsArr[1] = column
+                    SubMatrixArr[1] = subMatrixSize
                     maxSum = sum
 
                 elseif sum == maxSum
 
-                    push!(Rows,row)
-                    push!(Columns,column)
-                    push!(SubMatrix, subMatrixSize)
+                    push!(SumArr,sum)
+                    push!(RowsArr,row)
+                    push!(ColumnsArr,column)
+                    push!(SubMatrixArr, subMatrixSize)
 
                 end
 
@@ -68,31 +72,21 @@ function max_sum_submatrix(matrix)
 
     end
 
-    for index in 1 : length(Rows)
+    for index in 1 : length(RowsArr)
 
-        sum = 0
+        r = RowsArr[index]
+        c = ColumnsArr[index]
+        s = SubMatrixArr[index]
 
-        r = Rows[index]
-        c = Columns[index]
-        s = SubMatrix[index]
-
-        for row in r : r + ( s - 1 )
-
-            for column in c : c + ( s - 1 )
-
-                sum += matrix[row,column]
-
-            end
-
-        end
-
-        if sum == maxSum
+        if SumArr[index] == maxSum
 
             println(view( matrix, r : r + (s-1), c : c + (s-1) )) 
 
         end
 
     end
+
+    return
 
 end
 
